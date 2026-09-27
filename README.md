@@ -2,7 +2,7 @@
 
 基于 TI MSPM0G3507、TB6612 和双路带编码器电机，实现 10 ms 双电机速度环与五路灰度差速巡线。原始工程在同一黑色胶带赛道按“完整跑完且未脱线”测试 15 次，项目作者报告成功 15 次（15/15）；下面附有 21.6 秒实车演示。
 
-[![小车巡线演示封面](media/demo-cover.jpg)](media/line-following-demo.mp4)
+<a href="media/line-following-demo.mp4"><img src="media/demo-cover.jpg" alt="小车巡线演示封面" width="320"></a>
 
 [观看 21.6 秒巡线演示](media/line-following-demo.mp4) · [查看测试口径与视频证据](docs/demo-evidence.md) · [查看控制代码](user_driver/motor.c)
 
