@@ -1,0 +1,9 @@
+Debug/
+Release/
+.settings/
+.vscode/
+*.out
+*.map
+*.o
+*.d
+*.launch

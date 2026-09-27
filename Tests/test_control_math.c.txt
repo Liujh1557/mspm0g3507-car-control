@@ -1,0 +1,13 @@
+#include <assert.h>
+#include <stdio.h>
+#include "control_math.h"
+
+int main(void)
+{
+    assert(MotorPid_NextDuty(500U, -100.0f, 0.0f, 0.5f, 0.4f, 4000U) == 410U);
+    assert(MotorPid_NextDuty(20U, -100.0f, 0.0f, 0.5f, 0.4f, 4000U) == 0U);
+    assert(MotorPid_NextDuty(3990U, 100.0f, 0.0f, 0.5f, 0.4f, 4000U) == 4000U);
+    assert(MotorPid_NextDuty(500U, 0.0f, 0.0f, 0.5f, 0.4f, 4000U) == 500U);
+    puts("control_math tests passed");
+    return 0;
+}
