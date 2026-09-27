@@ -1,6 +1,10 @@
 # MSPM0G3507 双电机速度控制与五路灰度巡线原型
 
-基于 TI MSPM0G3507、TB6612 和双路带编码器直流电机的教学小车固件。工程包含双路 PWM、编码器边沿计数、10 ms 轮速计算与增量 PI、五路数字灰度输入和按传感器位置调整左右目标速度的逻辑。**目前公开仓库证明了源码结构与控制计算单测；整车连续巡线效果需结合实测材料单独核对。**
+基于 TI MSPM0G3507、TB6612 和双路带编码器直流电机的教学小车固件。工程包含双路 PWM、编码器边沿计数、10 ms 轮速计算与增量 PI、五路数字灰度输入和按传感器位置调整左右目标速度的逻辑。历史实车视频展示沿黑色胶带通过直线与弯道；当前整理后的代码尚未重新上车验证。
+
+[![小车巡线演示封面](media/demo-cover.jpg)](media/line-following-demo.mp4)
+
+[观看 21.6 秒巡线演示](media/line-following-demo.mp4) · [视频证据与适用范围](docs/demo-evidence.md)
 
 ## 30 秒看项目
 
@@ -8,7 +12,7 @@
 | --- | --- | --- |
 | 双路电机驱动与测速 | [`motor.c`](user_driver/motor.c)、[`key.c`](user_driver/key.c) | 代码及 [`empty.syscfg`](empty.syscfg) 引脚/定时器配置 |
 | 10 ms 速度环 | [`motor.c`](user_driver/motor.c) 的定时器中断、[`control_math.h`](user_driver/control_math.h) 的有符号增量 PI | [主机单测](Tests/test_control_math.c.txt)覆盖负向调整及上下限 |
-| 五路巡线输入 | [`huidu.c`](user_driver/huidu.c) | 源码可检查，实际轨迹与复杂路口表现待实测材料核对 |
+| 五路巡线输入 | [`huidu.c`](user_driver/huidu.c) | 历史[实车视频](media/line-following-demo.mp4)展示沿黑线通过直线和弯道；复杂路口与新版代码仍待验证 |
 | 串口观察 | [`main.c`](main.c) 每 500 ms 输出五路输入状态 | UART0 115200 配置见 SysConfig |
 
 ```mermaid
@@ -32,7 +36,8 @@ flowchart LR
 - `Tests/run_host_tests.ps1`：本机 GCC 控制计算单测通过，覆盖负向更新、0/4000 限幅与零误差保持。
 - TI SysConfig 1.26.2 用本机 MSPM0 SDK 2.11.00.07 成功生成配置；原项目元数据指定 SDK 2.10.00.04，因此存在版本不匹配警告。
 - TI Arm Clang 4.0.2.LTS 对六个应用 `.c` 文件完成语法检查；项目元数据指定 4.0.4.LTS。**这不是完整 CCS 链接构建，也不是板端验证。**
-- 实车速度曲线、赛道视频与传感器极性/轮径/编码器线数的标定记录待补充。当前不宣称稳定巡线速度、误差或成功率。
+- 2026-08-01 拍摄的约 21.6 秒[历史实车视频](media/line-following-demo.mp4)展示沿黑色胶带通过直线与弯道。视频早于本次代码修订，无法确认所用固件与仓库当前提交完全一致，详见[证据说明](docs/demo-evidence.md)。
+- 实车速度曲线、传感器极性/轮径/编码器线数的标定记录仍缺失。当前不宣称稳定巡线速度、误差或成功率。
 
 ## 复现
 
